@@ -20,5 +20,7 @@ from django.urls import path, include #include serve para incluir alguma coisa
 #Definir as rotas de navegação
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('autenticacao.urls'))
+    path('auth/', include('autenticacao.urls')),
+    path('', include('plataforma.urls'))
+
 ]
