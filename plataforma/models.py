@@ -30,3 +30,26 @@ class DadosPaciente(models.Model):
 	trigliceridios = models.IntegerField()
 	def __str__(self):
 		return f"Paciente({self.paciente.nome}, {self.peso})"
+
+
+#Criar tabela refeicao para armazenar as refeições do paciente
+class Refeicao(models.Model):
+    paciente = models.ForeignKey(Pacientes, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=50)
+    horario = models.TimeField()
+    carboidratos = models.IntegerField()
+    proteinas = models.IntegerField()
+    gorduras = models.IntegerField()
+
+    def __str__(self):
+        return self.titulo
+
+#Opção da refeição, por exemplo: 100g de banana para jantar ou almoço?
+class Opcao(models.Model):
+    refeicao = models.ForeignKey(Refeicao, on_delete=models.CASCADE)
+    imagem = models.ImageField(upload_to="opcao")#Importante para funcionar arquivo
+    descricao = models.TextField()
+
+    def __str__(self):
+        return self.descricao
+

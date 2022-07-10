@@ -21,7 +21,6 @@ def cadastro(request):
         #Verificar se o usuario ja esta autenticado
         if request.user.is_authenticated:
             return redirect('/')
-
         return render(request, 'cadastro.html')
 
     elif request.method == "POST":
@@ -31,7 +30,7 @@ def cadastro(request):
         confirmar_senha = request.POST.get('confirmar_senha')
 
         #Se algum requisito não for valido, vai retornar para pagina
-        if not password_is_valid(request, senha,confirmar_senha):
+        if not password_is_valid(request, senha, confirmar_senha):
             return redirect('/auth/cadastro')
 
         try:
@@ -66,7 +65,7 @@ def logar(request):
         if request.user.is_authenticated:
             return redirect('/')
         return render(request, 'logar.html') #retornando para logar
-    elif request.method == "POST": #se ela venho de um form
+    if request.method == "POST": #se ela venho de um form
         username = request.POST.get('usuario')
         senha = request.POST.get('senha')
 
@@ -80,7 +79,7 @@ def logar(request):
     else:
         #Se existe, autenticar
         auth.login(request, usuario)
-        return redirect('/')
+        return redirect('/pacientes')
 
 #Função para deslogar
 def sair(request):
